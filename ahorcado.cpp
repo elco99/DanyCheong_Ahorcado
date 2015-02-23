@@ -209,8 +209,7 @@ void Jugar(){
 			int random = rand() % (cont-1);
 			char* guess;
 			guess = lista[random];
-			cout << guess<<endl;
-			RealPlay(guess,cont);
+			RealPlay(guess,strlen(guess)+1);
 			
 			for(int i = 0; i < cont;i++){
 				delete[] lista[i];
@@ -234,8 +233,7 @@ void Jugar(){
 			int random = rand() % (cont-1);
 			char* guess;
 			guess = lista[random];
-			cout << guess<<endl;
-			RealPlay(guess,cont);
+			RealPlay(guess,strlen(guess)+1);
 			
 			for(int i = 0; i < cont;i++){
 				delete[] lista[i];
@@ -259,8 +257,7 @@ void Jugar(){
 			int random = rand() % (cont-1);
 			char* guess;
 			guess = lista[random];
-			cout << guess<<endl;
-			RealPlay(guess,cont);
+			RealPlay(guess,strlen(guess)+1);
 			
 			for(int i = 0; i < cont;i++){
 				delete[] lista[i];
@@ -286,7 +283,6 @@ void RealPlay(char* lista,int cont){
 			gano = true;
 			break;
 		}
-		pierde = false;
 		continua = true;
 		do{
 			if(strlen(user) > 1){
@@ -326,17 +322,25 @@ void RealPlay(char* lista,int cont){
 		}
 
 		if(continua == true){
+			pierde = false;
 			for(int i=0;i < cont-1;i++){
-				if(user[0] != lista[i]){
-					pierde = true;
-				}else{
+				if(user[0] == lista[i]){
 					pierde = false;
-					guess[i] = user[0];
-					winner++;
+					break;
+				}else{
+					pierde = true;
 				}
 			}
+
 			if(pierde == true){
 				vida++;
+			}else{
+				for(int i=0;i < cont-1;i++){
+					if(user[0] == lista[i]){
+						guess[i] = user[0];
+						winner++;
+					}
+				}
 			}
 
 			Life(vida);
